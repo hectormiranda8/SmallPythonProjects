@@ -29,15 +29,12 @@ def randomDate(year: int, month: int) -> dt.date:
     return random.choice([date for date in d if date.month == month])
 
 
-def commonBirthday(dates: list[dt.date]) -> dt.date:
-    return max(set(dates), key=dates.count)
-
-
 def generateBirthdays(gen_count: int) -> list:
     def helperGen() -> list[dt.date]:
         lst = []
+        start_date = dt.date(1999, 1, 1)
         for _ in range(gen_count):
-            lst.append(randomDate(1999, random.randint(1, 12)))
+            lst.append(start_date +  dt.timedelta(random.randint(0, 364)))
         return lst
 
     bday_list = helperGen()
