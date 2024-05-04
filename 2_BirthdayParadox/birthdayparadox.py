@@ -1,5 +1,4 @@
 import random
-import calendar
 import datetime as dt
 
 
@@ -21,12 +20,6 @@ MONTHS = {
 
 def printDates(dates: list[dt.date]) -> None:
     print(", ".join([f"{MONTHS[d.month]} {d.day}" for d in dates]))
-
-
-# https://stackoverflow.com/questions/45833559/generate-random-date-in-a-particular-month-and-year#:~:text=In%20short%2C%20use%20calendar%20lib%3A%20import%20calendar%2C%20random,month%5D%29%20This%20function%20will%20return%20a%20datetime.date%20object.
-def randomDate(year: int, month: int) -> dt.date:
-    d = calendar.Calendar().itermonthdates(year, month)
-    return random.choice([date for date in d if date.month == month])
 
 
 def generateBirthdays(gen_count: int) -> list:
