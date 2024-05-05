@@ -25,7 +25,6 @@ import time
 
 class BouncingText():
     def __init__(self):
-        # bext.resize(1280, 720) # 721 because we're counting on y = 0
         self.width, self.height = bext.size()
         self.corner_hit = 0
         self.x = random.randint(0, self.width)
