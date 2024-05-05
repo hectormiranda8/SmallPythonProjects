@@ -40,19 +40,19 @@ class BouncingText():
         bext.title(f"Corner Hits: {self.corner_hit}")
         bext.hide_cursor()
     
-    def xBoundary(self):
+    def xBoundary(self) -> bool:
         if self.x in [0, self.width-3]:
             self.vx *= -1
             return True
         return False
     
-    def yBoundary(self):
+    def yBoundary(self) -> bool:
         if self.y in [0, self.height-1]:
             self.vy *= -1
             return True
         return False
 
-    def checkBoundaries(self):
+    def checkBoundaries(self) -> None:
         if (self.x, self.y) in [(0, 0),
                                 (self.width-3, 0),
                                 (0, self.height-1),
@@ -69,7 +69,7 @@ class BouncingText():
             bext.fg(new_color)
             self.curr_color = new_color
 
-    def bounceLoop(self):
+    def bounceLoop(self) -> None:
         try:
             while True:
                 self.x += self.vx
