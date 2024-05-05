@@ -25,7 +25,9 @@ def initialComment() -> None:
 
 def continuePlaying() -> bool:
     print("Do you want to play again? (yes or no)")
-    user_input = input()
+    user_input = input("> ").lower()
+    while user_input != "yes" and user_input != "no":
+        user_input = input("> ").lower()
     return user_input == "yes"
 
 
