@@ -20,12 +20,12 @@ import random
 import sys
 
 
-CARDVALUES  = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+CARDVALUES  = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
 CARDDESIGN  = {
     1: "A",
-    10: "J",
-    11: "Q",
-    12: "K"
+    11: "J",
+    12: "Q",
+    13: "K"
 }
 SPADES      = "spades"
 HEART       = "heart"
@@ -126,14 +126,15 @@ class Game:
         while not valid:
             try:
                 user_input = input("> ")
-                if user_input.lower() == "quit":
+                user_input.lower()
+                if user_input == "quit" or user_input == "q":
                     self.quitGame()
                 user_input = int(user_input)
                 if user_input < 1 or user_input > self.money:
                     raise Exception()
                 valid = True
             except Exception:
-                print(f"Please select a valid option. (1-{self.money} or QUIT)")
+                print(f"Please select a valid option. (1-{self.money} or (Q)UIT)")
         return user_input
 
     def blackjackHand(self, player: Player) -> bool:
@@ -202,7 +203,7 @@ class Game:
         self.run_game = True
 
         print(f"\nMoney: ${self.money}")
-        print(f"How much do you bet? (1-{self.money}, or QUIT)")
+        print(f"How much do you bet? (1-{self.money}, or (Q)UIT)")
         self.bet = self.betInput()
 
         self.player = Player("PLAYER")
@@ -228,7 +229,7 @@ class Game:
                 self.quitGame()
             if self.run_game: # may have changed during stages
                 can_double = self.bet * 2 < self.money
-                print(f"\n(H)it, (S)tand{", (D)ouble down" if can_double else ""}")
+                print(f"\n(H)it, (S)tand{', (D)ouble down' if can_double else ''}")
                 self.stageInput(can_double=can_double)
 
         self.gameSetUp()
@@ -256,6 +257,8 @@ class Player:
         if randCard.value_symbol == "A":
             self.curr_total = [v + 1 for v in self.curr_total] \
                             + [v + 11 for v in self.curr_total]
+        elif randCard.value_symbol in CARDDESIGN.values():
+            self.curr_total = [v + 10 for v in self.curr_total]
         else:
             self.curr_total = [v + randCard.value for v in self.curr_total]
 
