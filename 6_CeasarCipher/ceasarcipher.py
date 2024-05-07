@@ -19,10 +19,15 @@ cipher. If you’d like to learn about ciphers and code breaking in general, you
 can read my book Cracking Codes with Python (No Starch Press, 2018; https://
 nostarch.com/crackingcodes/).
 """
+import pyperclip as pc
+
 
 class CeasarCypher:
     def __init__(self) -> None:
         self.abc = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+    def copyToClipboard(self, msg: str) -> None:
+        pc.copy(msg)
     
     def encrypt(self, to_encrypt: str, key: int) -> str:
         encrypted = ""
@@ -73,12 +78,18 @@ if __name__ == "__main__":
         msg = input("> ")
         print("Please enter the key (0 to 25) to use.")
         key = validKey()
-        print(ceasarcypher.encrypt(msg, key))
+        encrypted = ceasarcypher.encrypt(msg, key)
+        print(encrypted)
+        ceasarcypher.copyToClipboard(encrypted)
+        print("Full encrypted text copied to clipboard.")
     elif user_input == "d":
         print("Enter message to decrypt.")
         msg = input("> ")
         print("Please enter the key (0 to 25) to use.")
         key = validKey()
-        print(ceasarcypher.decrypt(msg, key))
+        decrypted = ceasarcypher.decrypt(msg, key)
+        print(decrypted)
+        ceasarcypher.copyToClipboard(decrypted)
+        print("Full decrypted text copied to clipboard.")
     else:
         raise Exception("No valid options were detected.")
