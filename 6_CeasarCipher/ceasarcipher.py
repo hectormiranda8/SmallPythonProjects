@@ -33,7 +33,7 @@ class CeasarCypher:
             encrypted += ec
         return encrypted
     
-    def decrypt(self, to_decrypt: str, key: int):
+    def decrypt(self, to_decrypt: str, key: int) -> str:
         decrypted = ""
         for l in to_decrypt.upper():
             dc = l
@@ -62,6 +62,7 @@ def validKey() -> int:
     except:
         print("Please choose a valid key.")
         return validKey()
+
 
 if __name__ == "__main__":
     ceasarcypher = CeasarCypher()
